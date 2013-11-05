@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="com.eficid.cordova.plugin.rfidscanner"
+      version="0.1.0">
+    <name>RFIDScanner</name>
+    <description>RFIDScanner PhoneGap Plugin</description>
+    <license>LGPL</license>
+    <keywords>phonegap,rfid,rfidscanner</keywords>
+
+
+    <js-module src="www/rfidscanner.js" name="RFIDScanner">
+        <clobbers target="window.rfidscanner" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="RFIDScanner">
+                <param name="android-package" value="com.eficid.cordova.plugin.RFIDScanner"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/com/eficid/cordova/plugin/RFIDScanner.java" target-dir="src/com/eficid/cordova/plugin" />      
+     </platform>          
+</plugin>
