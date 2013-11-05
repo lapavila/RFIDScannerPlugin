@@ -17,10 +17,10 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="RFIDScanner">
-                <param name="android-package" value="com.eficid.cordova.plugin.RFIDScanner"/>
+                <param name="android-package" value="com.eficid.cordova.plugin.RfidScanner"/>
             </feature>
         </config-file>
 
-        <source-file src="src/com/eficid/cordova/plugin/RFIDScanner.java" target-dir="src/com/eficid/cordova/plugin" />      
+        <source-file src="src/com/eficid/cordova/plugin/RfidScanner.java" target-dir="src/com/eficid/cordova/plugin" />      
      </platform>          
 </plugin>
