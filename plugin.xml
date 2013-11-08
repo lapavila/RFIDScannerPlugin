@@ -20,6 +20,6 @@
             </feature>
         </config-file>
 
-        <source-file src="src/com/eficid/cordova/plugin/RfidScanner.java" target-dir="src/com/eficid/cordova/plugin" />      
+        <source-file src="src/android/RfidScanner.java" target-dir="src/com/eficid/cordova/plugin" />      
      </platform>          
 </plugin>
