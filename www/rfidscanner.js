@@ -5,5 +5,5 @@ var rfidscanner = {
     radar: function(successCallback, errorCallback, tags) {
          cordova.exec(successCallback, errorCallback, 'RfidScanner', 'radar', tags);
     };
-}
+};
 module.exports = rfidscanner;
