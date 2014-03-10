@@ -16,8 +16,8 @@ import java.util.ArrayList;
  * Created by avila on 28/10/13.
  */
 public class RfidScanner extends CordovaPlugin {
-    public static final int SCAN_CODE = 0x05ca2c0de;
-    public static final int RADAR_CODE = 0x07ada7c0de;
+    public static final int SCAN_CODE = 0;
+    public static final int RADAR_CODE = 1;
     private static final String SCAN_INTENT = "eficid.intent.action.RFID_SCAN";
     private static final String RADAR_INTENT = "eficid.intent.action.RFID_RADAR";
     private static final String CANCELLED = "cancelled";
@@ -48,7 +48,14 @@ public class RfidScanner extends CordovaPlugin {
         Intent intentScan = new Intent();
         intentScan.setAction(RADAR_INTENT);
         ArrayList<String> tagList = new ArrayList<String>();
-        tagList.addAll(args);
+        tagList.clear();
+        try {
+            for (int i = 0; i < args.length(); i++) {
+                tagList.add(args.get(i).toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         intent.putStringArrayListExtra("EPC_LIST", tagList);
         this.cordova.startActivityForResult(this, intentScan, RADAR_CODE);
     }
