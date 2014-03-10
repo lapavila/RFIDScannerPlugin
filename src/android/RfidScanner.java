@@ -10,13 +10,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by avila on 28/10/13.
  */
 public class RfidScanner extends CordovaPlugin {
-
-    public static final int REQUEST_CODE = 0x0ba7c0de;
-    private static final String SCAN_INTENT = "android.intent.action.RFID";
+    public static final int SCAN_CODE = 0x05ca2c0de;
+    public static final int RADAR_CODE = 0x07ada7c0de;
+    private static final String SCAN_INTENT = "eficid.intent.action.RFID_SCAN";
+    private static final String RADAR_INTENT = "eficid.intent.action.RFID_RADAR";
     private static final String CANCELLED = "cancelled";
     private static final String LOG_TAG = "RfidScanner";
 
@@ -27,6 +30,8 @@ public class RfidScanner extends CordovaPlugin {
         this.callbackContext = callbackContext;
         if (action.equals("scan")) {
             scan();
+        } else if (action.equals("radar")) {
+        	radar(args);
         } else {
             return false;
         }
@@ -36,41 +41,61 @@ public class RfidScanner extends CordovaPlugin {
     public void scan() {
         Intent intentScan = new Intent();
         intentScan.setAction(SCAN_INTENT);
-        intentScan.addCategory(Intent.CATEGORY_DEFAULT);
+        this.cordova.startActivityForResult(this, intentScan, SCAN_CODE);
+    }
 
-        this.cordova.startActivityForResult(this, intentScan, REQUEST_CODE);
+    public void radar(JSONArray args) {
+        Intent intentScan = new Intent();
+        intentScan.setAction(RADAR_INTENT);
+        ArrayList<String> tagList = new ArrayList<String>();
+        tagList.addAll(args);
+        intent.putStringArrayListExtra("EPC_LIST", tagList);
+        this.cordova.startActivityForResult(this, intentScan, RADAR_CODE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                JSONObject obj = new JSONObject();
-                try {
-                    String result = intent.getStringExtra("result");
-                    JSONArray jsArray = new JSONArray();
-                    for (String tag : result.split(";")) {
-                        jsArray.put(tag);
-                    }
-                    obj.put(CANCELLED, false);
-                    obj.put("tags", jsArray);
-                } catch (JSONException e) {
-                    Log.d(LOG_TAG, "This should never happen");
-                }
+    	switch(requestCode) {
+       		case SCAN_CODE :
+	            if (resultCode == Activity.RESULT_OK) {
+	                JSONObject obj = new JSONObject();
+	                try {
+	                    ArrayList<String> result = intent.getStringArrayListExtra("RESULT");
+	                    JSONArray jsArray = new JSONArray(result);
+	                    obj.put(CANCELLED, false);
+	                    obj.put("tags", jsArray);
+	                } catch (JSONException e) {
+	                    Log.d(LOG_TAG, "This should never happen");
+	                }
 
-                this.callbackContext.success(obj);
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                JSONObject obj = new JSONObject();
-                try {
-                    obj.put(CANCELLED, true);
-                    obj.put("tags", "");
-                } catch (JSONException e) {
-                    Log.d(LOG_TAG, "This should never happen");
-                }
-                this.callbackContext.success(obj);
-            } else {
-                this.callbackContext.error("Unexpected error");
-            }
-        }
+	                this.callbackContext.success(obj);
+	            } else if (resultCode == Activity.RESULT_CANCELED) {
+	                JSONObject obj = new JSONObject();
+	                try {
+	                    obj.put(CANCELLED, true);
+	                    obj.put("tags", "");
+	                } catch (JSONException e) {
+	                    Log.d(LOG_TAG, "This should never happen");
+	                }
+	                this.callbackContext.success(obj);
+	            } else {
+	                this.callbackContext.error("Unexpected error");
+	            }
+	            break;
+		    case RADAR_CODE :
+		    	if (resultCode == Activity.RESULT_CANCELED) {
+	                JSONObject obj = new JSONObject();
+	                try {
+	                    obj.put(CANCELLED, true);
+	                    obj.put("tags", "");
+	                } catch (JSONException e) {
+	                    Log.d(LOG_TAG, "This should never happen");
+	                }
+	                this.callbackContext.success(obj);
+	            } else {
+	                this.callbackContext.error("Unexpected error");
+	            }
+	            break;
+	    }
     }
 }
