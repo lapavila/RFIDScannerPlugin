@@ -4,7 +4,7 @@ var rfidscanner = {
     },
     radar: function(successCallback, errorCallback, tags) {
     	alert(tags);
-    	alert(tags.lenght;)
+    	alert(tags.lenght);
         cordova.exec(successCallback, errorCallback, 'RfidScanner', 'radar', tags);
     }
 };
