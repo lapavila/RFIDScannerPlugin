@@ -56,7 +56,7 @@ public class RfidScanner extends CordovaPlugin {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        intent.putStringArrayListExtra("EPC_LIST", tagList);
+        intentScan.putStringArrayListExtra("EPC_LIST", tagList);
         this.cordova.startActivityForResult(this, intentScan, RADAR_CODE);
     }
 
