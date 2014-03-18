@@ -3,9 +3,9 @@ RFIDScannerPlugin
 
 RFID Scanner plugin for PhoneGap
 
-This PhoneGap plugin allows third-party software developers to easily add UHF RFID reading features using MTI’s RFID ME&#153; smartphone and tablet readers.
+This PhoneGap plugin allows third-party software developers to easily add UHF RFID reading features using MTI’s RFID ME&#153; mobile readers.
 
-This dipose two functions: Scan and Radar
+It enables two main features: Scan and Radar
 
 With scan you read epc of RFID's tags.
 
