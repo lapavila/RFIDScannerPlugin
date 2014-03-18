@@ -13,6 +13,7 @@ Scan makes RIFD tags reading, retrieving its EPCs.
 
 A full example to scan could be:
 ...
+
     function callScan() {
         try {
           rfidscanner.scan(winScan, failScan);
@@ -36,6 +37,7 @@ A full example to scan could be:
     var failScan = function (error) {
                        alert("Scanning failed: " + error);
                    };
+                   
 ...
 
 Radar lets user search for the items in a list
@@ -44,6 +46,7 @@ Radar lets user search for the items in a list
 
 A full example to radar could be:
 ...
+
     function callRadar() {
         try {
           var tags = document.getElementById('epcs').value.split("\n");
@@ -62,6 +65,7 @@ A full example to radar could be:
     var failRadar = function (error) {
                        alert("Scanning failed: " + error);
                    };
+                   
 ...
 
 Install
