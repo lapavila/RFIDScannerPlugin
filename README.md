@@ -7,7 +7,7 @@ This PhoneGap plugin allows third-party software developers to easily add UHF RF
 
 It enables two main features: Scan and Radar
 
-With scan you read epc of RFID's tags.
+Scan makes RIFD tags reading, retrieving its EPCs.
 
 `success` and `fail` are callback functions. Success is passed an object with data and cancelled properties. Data is the json array with a list of epc tag data and cancelled is whether or not the user cancelled the scan.
 
@@ -38,7 +38,7 @@ A full example to scan could be:
                    };
 ...
 
-With radar you can pass a list of EPC's to locate.
+Radar lets user search for the items in a list
 
 `success` and `fail` are callback functions. Success is passed an object with cancelled properties. Cancelled is whether or not the user cancelled the scan.
 
