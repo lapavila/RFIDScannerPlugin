@@ -5,7 +5,7 @@
       version="0.1.0">
     <name>RfidScanner</name>
     <description>RfidScanner PhoneGap Plugin</description>
-    <license>LGPL</license>
+    <license>MIT</license>
     <keywords>phonegap,rfid,rfidscanner</keywords>
 
     <engines>
